@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const {, getChildNotes
+const {
+  getChildNotes,
   login,
   register,
   getStudents,
