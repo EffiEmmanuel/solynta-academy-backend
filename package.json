@@ -13,20 +13,13 @@
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.40.0",
     "cors": "^2.8.5",
-<<<<<<< HEAD
     "cross-fetch": "^4.0.0",
-=======
->>>>>>> 02cbd1d006f56b4071817f1ffc0daf4cf15632f1
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-formidable": "^1.2.0",
     "jsonwebtoken": "^9.0.1",
-<<<<<<< HEAD
     "mongoose": "^7.4.1",
     "node-fetch": "^2.6.12",
-=======
-    "mongoose": "^5.1.2",
->>>>>>> 02cbd1d006f56b4071817f1ffc0daf4cf15632f1
     "openai": "^3.3.0",
     "socket.io": "^4.7.1"
   },
