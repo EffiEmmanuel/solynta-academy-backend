@@ -133,7 +133,7 @@ const enrolClass = async (request, response) => {
         message: "Class no longer available",
       });
     }
-    if (class1.student?.includes(studentId)) {
+    if (class1.student.includes(studentId)) {
       return response.status(400).json({
         success: false,
         message: "User is already enrolled in the class",
@@ -194,8 +194,8 @@ const getClasses = async (request, response) => {
 
     const userClasses = [];
     if (classes) {
-      classes?.forEach((myClass) => {
-        if (myClass?.student?.includes(studentId)) {
+      classes.forEach((myClass) => {
+        if (myClass.student.includes(studentId)) {
           userClasses.push(myClass);
         }
       });
@@ -255,9 +255,9 @@ const getCourses = async (request, response) => {
 
     const studentCourses = [];
     if (courses) {
-      courses?.forEach((course) => {
-        if (course?.students?.includes(studentId)) {
-          studentCourses?.push(course);
+      courses.forEach((course) => {
+        if (course.students.includes(studentId)) {
+          studentCourses.push(course);
         }
       });
     }
