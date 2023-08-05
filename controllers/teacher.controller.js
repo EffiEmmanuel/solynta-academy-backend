@@ -1,5 +1,9 @@
 const Teacher = require("../models/teacher.model");
 const Student = require("../models/student.model");
+const bookModel = require("../models/book.model");
+const videoModel = require("../models/video.model");
+const noteModel = require("../models/note.model");
+const { cloudinaryUpload } = require("../helpers/cloudinary");
 const { passwordCompare, passwordHash } = require("../helpers/bcrypt");
 const { signToken } = require("../middlewares/jwt");
 
@@ -131,8 +135,176 @@ const getAllStudents = async (request, response) => {
   }
 };
 
+const createBook = async (request, response) => {
+  try {
+    const { title, author, image, teacherId } = request.body;
+    // const photo = request.files.file;
+    const book = new bookModel({
+      title: title,
+      author: author,
+      teacherId: teacherId,
+      image: image,
+    });
+
+    if (image) {
+      await cloudinaryUpload(image.path)
+        .then((downloadURL) => {
+          book.image = downloadURL;
+        })
+        .catch((err) => {
+          return response.status(400).json({ message: err.message });
+        });
+    }
+    await book.save();
+
+    return response.status(201).json({
+      success: true,
+      message: "book created successfully",
+      Data: book,
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+const getTeacherBooks = async (request, response) => {
+  const teacherId = request.params.teacherId;
+  try {
+    const books = await bookModel.find({ teacherId: teacherId });
+    return response.status(200).json({
+      success: true,
+      message: "Data retrieved successfully",
+      Data: books,
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+const deleteTeacherBook = async (request, response) => {
+  const { teacherId, bookId } = request.params;
+  try {
+    await bookModel.findByIdAndDelete({ _id: bookId, teacherId: teacherId });
+    return response.status(200).json({
+      success: true,
+      message: "Deleted successfully",
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+const createVideo = async (request, response) => {
+  try {
+    const { title, link, image, teacherId } = request.body;
+    // const photo = request.files.file;
+    const video = new videoModel({
+      title: title,
+      link: link,
+      teacherId: teacherId,
+      image: image,
+    });
+
+    if (image) {
+      await cloudinaryUpload(image.path)
+        .then((downloadURL) => {
+          video.image = downloadURL;
+        })
+        .catch((err) => {
+          return response.status(400).json({ message: err.message });
+        });
+    }
+    await video.save();
+
+    return response.status(201).json({
+      success: true,
+      message: "Video created successfully",
+      Data: video,
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+const getTeacherVideos = async (request, response) => {
+  const teacherId = request.params.teacherId;
+  try {
+    const videos = await videoModel.find({ teacherId: teacherId });
+    return response.status(200).json({
+      success: true,
+      message: "Data retrieved successfully",
+      Data: videos,
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+const deleteTeacherVideo = async (request, response) => {
+  const { teacherId, videoId } = request.params;
+  try {
+    await videoModel.findByIdAndDelete({ _id: videoId, teacherId: teacherId });
+    return response.status(200).json({
+      success: true,
+      message: "Deleted successfully",
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+const createNote = async (request, response) => {
+  try {
+    const { note, studentId, teacherId } = request.body;
+    // const photo = request.files.file;
+    const newNote = new noteModel({
+      note: note,
+      student: studentId,
+      teacherId: teacherId,
+    });
+
+    await newNote.save();
+
+    return response.status(201).json({
+      success: true,
+      message: "note created successfully",
+      Data: newNote,
+    });
+  } catch (err) {
+    return response.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   register,
   login,
   getAllStudents,
+  createBook,
+  getTeacherBooks,
+  deleteTeacherBook,
+  createVideo,
+  createNote,
+  getTeacherVideos,
+  deleteTeacherVideo,
 };

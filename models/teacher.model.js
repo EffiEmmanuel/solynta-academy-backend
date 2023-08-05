@@ -27,6 +27,18 @@ const teacherSchema = new mongoose.Schema(
         ref: "Class",
       },
     ],
+    books: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Book",
+      },
+    ],
+    videos: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Video",
+      },
+    ],
     higherEducation: {
       type: String,
     },
