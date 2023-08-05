@@ -133,7 +133,7 @@ const enrolClass = async (request, response) => {
         message: "Class no longer available",
       });
     }
-    if (class1?.student?.includes(studentId)) {
+    if (class1.student?.includes(studentId)) {
       return response.status(400).json({
         success: false,
         message: "User is already enrolled in the class",
