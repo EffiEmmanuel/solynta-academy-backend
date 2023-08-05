@@ -10,6 +10,7 @@ const {
   createVideo,
   getTeacherVideos,
   deleteTeacherVideo,
+  createNote,
 } = require("../controllers/teacher.controller");
 const { authenticateToken } = require("../middlewares/jwt");
 const {
