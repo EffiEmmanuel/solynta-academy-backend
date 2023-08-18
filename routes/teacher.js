@@ -60,13 +60,13 @@ router.get("/get-courses", getAllCourses);
 router.delete("/delete-course", deleteCourse);
 router.post("/create-book", createBook);
 router.get("/get-teacher-books/:teacherId", getTeacherBooks);
-router.delete("/delete-teacher-book/:bookId/teacherId", deleteTeacherBook);
+router.delete("/delete-teacher-book/:bookId/:teacherId", deleteTeacherBook);
 router.post("/create-video", createVideo);
 router.get("/get-teacher-videos/:teacherId", getTeacherVideos);
 router.delete("/delete-teacher-video/:videoId/:teacherId", deleteTeacherVideo);
 router.post("/create-lesson", formidable(), createLesson);
 router.post("/create-note", createNote);
-router.get("/get-lesson", getLessons);
+router.get("/get-lessons", getLessons);
 router.delete("/delete-lesson", deleteLesson);
 
 module.exports = router;

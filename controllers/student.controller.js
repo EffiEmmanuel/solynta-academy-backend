@@ -117,7 +117,7 @@ const login = async (request, response) => {
 
 const enrolClass = async (request, response) => {
   try {
-    const studentId = request.user.student._id;
+    const studentId = request.body.student._id;
     const classId = request.query.classId;
     const studentExist = await Student.findById(studentId);
     const class1 = await Class.findById({ _id: classId });
@@ -156,7 +156,7 @@ const enrolClass = async (request, response) => {
 
 const getTeachers = async (request, response) => {
   try {
-    const studentId = request.user.student._id;
+    const studentId = request.body.student._id;
     const studentExists = await Student.findById(studentId);
     if (!studentExists) {
       return response.status(400).json({

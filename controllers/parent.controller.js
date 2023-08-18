@@ -106,7 +106,7 @@ const login = async (request, response) => {
 
 const getStudents = async (request, response) => {
   try {
-    const parentId = request.user.parent._id;
+    const parentId = request.query.parent._id;
     const parentExists = await Parent.findById(parentId);
     if (!parentExists) {
       return response.status(400).json({

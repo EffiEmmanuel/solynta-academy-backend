@@ -23,6 +23,6 @@ router.get("/get-absences/:studentId", getAbsences);
 router.get("/get-courses/:studentId", getCourses);
 router.get("/get-lessons", getLessons);
 router.post("/ai-chat", chatWithOpenAi);
-router.post("/mark-attendance", authenticateToken, markAttendance);
+router.post("/mark-attendance/:studentId", authenticateToken, markAttendance);
 
 module.exports = router;
